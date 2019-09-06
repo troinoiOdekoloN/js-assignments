@@ -547,7 +547,7 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-  var map = new Map();
+  let map = new Map();
   array.map(item => {
     if (!map.has(keySelector(item)))
       map.set(
@@ -572,7 +572,7 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-  var result = [];
+  let result = [];
   arr.map(item => (result = result.concat(childrenSelector(item))));
   return result;
 }
