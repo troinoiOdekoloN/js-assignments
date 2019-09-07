@@ -357,7 +357,14 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-  throw new Error("Not implemented");
+    // let years = endDate.getUTCFullYear() - startDate.getUTCFullYear();
+    // let days = endDate.getUTCDay() - startDate.getUTCDay();
+    // let months = endDate.getUTCMonth() - startDate.getUTCMonth();
+    // let mins = endDate.getUTCMinutes() - startDate.getUTCMinutes();
+    // let hours = endDate.getUTCHours() - startDate.getUTCHours();
+    // let msecs = endDate.getUTCMilliseconds() - startDate.getUTCMilliseconds();
+    // let sec = endDate.getUTCSeconds() - startDate.getUTCSeconds();
+   throw new Error("Not implemented");
 }
 
 /**
@@ -396,12 +403,15 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-  throw new Error("Not implemented");
+    // pathes.map((item, index)=>{
+    //     item.split('/')
+    // })
+    throw new Error("Not implemented");
 }
 
 /**
  * Returns the product of two specified matrixes.
- * See details: https://en.wikipedia.org/wiki/Matrix_multiplication
+ * See details: https://en.wikipedia.org/wi ki/Matrix_multiplication
  *
  * @param {array} m1
  * @param {array} m2
@@ -418,7 +428,20 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-  throw new Error("Not implemented");
+  let res = Array(m1.length);
+  for(let i = 0; i < res.length; i++){
+      res[i] = new Array(m2[0].length);
+  }
+  for(let i = 0; i < res.length; i++){
+      for(let j = 0;j < m2[0].length; j++){
+          let sum=0;
+          for(let g = 0;g < m2.length; g++){
+              sum = sum + m1[i][g]*m2[g][j];
+          }
+          res[i][j] = sum;
+      }
+  }
+  return res;
 }
 
 /**
@@ -452,7 +475,26 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-  throw new Error("Not implemented");
+  for(let i = 0;i < position.length; i++){
+    if(isEqual(position[i][0], position[i][1], position[i][2])){
+        return position[i][0];
+    }
+    if(isEqual(position[0][i], position[1][i], position[2][i])){
+        return position[0][i];
+    }
+  }
+
+  if(isEqual(position[0][0], position[1][1], position[2][2])){
+    return position[0][0];
+  }
+  if (isEqual(position[0][2], position[1][1], position[2][0])){
+    return position[1][1];
+  }
+  return undefined;
+
+  function isEqual(pos1, pos2, pos3) {
+    return pos1===pos2 && pos2===pos3 && pos1!==undefined
+  }
 }
 
 module.exports = {
