@@ -357,14 +357,23 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    // let years = endDate.getUTCFullYear() - startDate.getUTCFullYear();
-    // let days = endDate.getUTCDay() - startDate.getUTCDay();
-    // let months = endDate.getUTCMonth() - startDate.getUTCMonth();
-    // let mins = endDate.getUTCMinutes() - startDate.getUTCMinutes();
-    // let hours = endDate.getUTCHours() - startDate.getUTCHours();
-    // let msecs = endDate.getUTCMilliseconds() - startDate.getUTCMilliseconds();
-    // let sec = endDate.getUTCSeconds() - startDate.getUTCSeconds();
-   throw new Error("Not implemented");
+  let time = (endDate - startDate-0.1)/1000;
+  const min = 60;
+  const hour = min*60;
+  const day = hour*24;
+  const month = day*30;
+  const year = day*365;
+  return time<=45?'a few seconds ago':
+      time<=90?'a minute ago':
+          time<=45*min?`${Math.round(time/min)} minutes ago`:
+              time<=90*min?'an hour ago':
+                  time<=22*hour?`${Math.round(time/hour)} hours ago`:
+                      time<=36*hour?'a day ago':
+                          time<=25*day?`${Math.round(time/day)} days ago`:
+                              time<=45*day?'a month ago':
+                                  time<=345*day?`${Math.round(time/month)} months ago`:
+                                      time<=545*day?'a year ago':
+                                          `${Math.round(time/year)} years ago`
 }
 
 /**
