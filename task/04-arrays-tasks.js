@@ -37,7 +37,7 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  return new Array(len).fill(1).map((item, i) => {
+  return (new Array(len)).fill(1).map((item, i) => {
     return item + i * 2;
   });
 }
@@ -278,7 +278,7 @@ function getSecondItems(arr) {
  */
 function propagateItemsByPositionIndex(arr) {
   return arr
-    .map((item, index) => new Array(++index).fill(item))
+    .map((item, index) => (new Array(++index)).fill(item))
     .reduce((sum, curr) => sum.concat(curr), []);
 }
 
@@ -473,8 +473,8 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  return new Array(n).fill([]).map((item, index) => {
-    item = new Array(n).fill(0);
+  return (new Array(n)).fill([]).map((item, index) => {
+    item = (new Array(n)).fill(0);
     item[index] = 1;
     return item;
   });
@@ -494,7 +494,7 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-  return new Array(end - start + 1).fill(0).map((item, index) => {
+  return (new Array(end - start + 1)).fill(0).map((item, index) => {
     return start + index;
   });
 }
