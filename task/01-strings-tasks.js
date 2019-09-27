@@ -221,12 +221,8 @@ function encodeToRot13(str) {
   var ROTalphabet = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
   var newString = "";
   for(var i = 0; i < str.length; i++){
-    if(alphabet.indexOf(str[i]) !== -1){
-      newString += ROTalphabet[alphabet.indexOf(str[i])];
-    }
-    else{
-      newString += str[i]
-    }
+    const positionInStandartAlphabet = alphabet.indexOf(str[i])
+    positionInStandartAlphabet !== -1 ? newString += ROTalphabet[positionInStandartAlphabet] : newString += str[i]
   }
   return newString
 }
@@ -245,12 +241,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-  if (typeof value === 'string' || value instanceof String){
-    return true
-  }
-  else{
-    return false
-  }
+  return typeof value === 'string' || value instanceof String
 }
 
 /**
