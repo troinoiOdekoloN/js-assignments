@@ -21,7 +21,8 @@
  *   5, 5  => 25
  */
 function getRectangleArea(width, height) {
-  return width * height;
+  const rectangleArea = width * height;
+  return rectangleArea
 }
 
 /**
@@ -36,7 +37,8 @@ function getRectangleArea(width, height) {
  *   0    => 0
  */
 function getCicleCircumference(radius) {
-  return radius * 2 * Math.PI;
+  const cicleCircumference = radius * 2 * Math.PI;
+  return cicleCircumference
 }
 
 /**
@@ -52,7 +54,10 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return value1 / 2 + value2 / 2;
+  const firstValueAverage =  value1/ 2
+  const secondValueAverage = value2 / 2;
+  const twoNumbersAverage = firstValueAverage + secondValueAverage;
+  return twoNumbersAverage
 }
 
 /**
@@ -71,9 +76,10 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  let a = Math.abs(x1 - x2);
-  let b = Math.abs(y1 - y2);
-  return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+  const abscissaLength = Math.abs(x1 - x2);
+  const ordinateLength = Math.abs(y1 - y2);
+  const destanceBetweenPoints = Math.sqrt(Math.pow(abscissaLength, 2) + Math.pow(ordinateLength, 2));
+  return destanceBetweenPoints
 }
 
 /**
@@ -89,7 +95,8 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-  return -b / a;
+  const linearEquationRoot = -b / a;
+  return linearEquationRoot
 }
 
 /**
@@ -110,11 +117,11 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-  return Math.acos(
-    (x1 * x2 + y1 * y2) /
-      (Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2)) *
-        Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2)))
-  );
+  const firstVectorModule = Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2));
+  const secondVectorModule = Math.sqrt(Math.pow(x2, 2) + Math.pow(y2, 2));
+  const scalarVectorProduct = x1 * x2 + y1 * y2;
+  const angleBetweenVectors = Math.acos(scalarVectorProduct/firstVectorModule * secondVectorModule);
+  return angleBetweenVectors
 }
 
 /**
@@ -130,7 +137,8 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-  return value.toString().slice(-1);
+  const lastDigit = value.toString().slice(-1);
+  return lastDigit
 }
 
 /**
@@ -145,7 +153,8 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-  return value.toString();
+  const parsedNumber = value.toString();
+  return parsedNumber
 }
 
 /**
@@ -162,7 +171,11 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a, b, c) {
-  return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2));
+  const firstSideSquared = Math.pow(a, 2);
+  const secondSideSquared = Math.pow(b, 2);
+  const thirdSideSquared = Math.pow(c, 2);
+  const diagonalLength = Math.sqrt(firstSideSquared + secondSideSquared + thirdSideSquared);
+  return diagonalLength
 }
 
 /**
@@ -183,8 +196,9 @@ function getParallelipidedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  const x = Math.pow(10, pow);
-  return Math.round(num / x) * x;
+  const roundingRow = Math.pow(10, pow);
+  const roundedNumber = Math.round(num / roundingRow) * roundingRow;
+  return roundedNumber
 }
 
 /**
