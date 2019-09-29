@@ -17,7 +17,7 @@
  * @return {number}
  *
  * @example
- *    ['Ace', 10, true], 10    => 1
+ *    ['Ace', 10, true], 10    => 1 
  *    ['Array', 'Number', 'string'], 'Date'    => -1
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
@@ -69,7 +69,7 @@ function doubleArray(arr) {
  *    [] => []
  */
 function getArrayOfPositives(arr) {
-  return arr.filter(item => item > 0);
+  return arr.filter(item => { return item > 0 });
 }
 
 /**
@@ -84,7 +84,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-  return arr.filter(item => typeof item === "string");
+  return arr.filter(item => { return typeof item === "string" });
 }
 
 /**
@@ -101,7 +101,7 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-  return arr.filter(item => item);
+  return arr.filter(item => { return item });
 }
 
 /**
@@ -148,7 +148,8 @@ function getStringsLength(arr) {
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
 function insertItem(arr, item, index) {
-  return arr.splice(index, 0, item);
+  const arrCopy = arr;
+  return arrCopy.splice(index, 0, item);
 }
 
 /**
@@ -162,7 +163,8 @@ function insertItem(arr, item, index) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
 function getHead(arr, n) {
-  return arr.splice(0, n);
+  const arrCopy = arr;
+  return arrCopy.splice(0, n);
 }
 
 /**
@@ -296,7 +298,8 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
 function get3TopItems(arr) {
-  return arr
+  const arrCopy = arr;
+  return arrCopy
     .sort((a, b) => {
       return a - b;
     })
@@ -318,7 +321,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  return arr.filter(item => typeof item !== "string" && item > 0).length;
+  return arr.filter(item => { return typeof item !== "string" && item > 0 }).length;
 }
 
 /**
@@ -474,8 +477,10 @@ function sortCitiesArray(arr) {
  */
 function getIdentityMatrix(n) {
   return (new Array(n)).fill([]).map((item, index) => {
-    item = (new Array(n)).fill(0);
-    item[index] = 1;
+    const matrixRow = (new Array(n)).fill(0);
+    const diagonalPosition = index;
+    item = matrixRow;
+    item[diagonalPosition] = 1;
     return item;
   });
 }
@@ -572,9 +577,10 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-  let result = [];
-  arr.map(item => (result = result.concat(childrenSelector(item))));
-  return result;
+  return arr.reduce((result,currentItem) => {
+    const arrItem = childrenSelector(currentItem)
+    return result.concat(arrItem)
+  }, []);
 }
 
 /**
@@ -590,8 +596,9 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-  indexes.map(item => (arr = arr[item]));
-  return arr;
+  let arrCopy = arr;
+  indexes.map(item => (arrCopy = arrCopy[item]));
+  return arrCopy;
 }
 
 /**
@@ -615,16 +622,19 @@ function getElementByIndexes(arr, indexes) {
 function swapHeadAndTail(arr) {
   if (arr.length === 1) {
     return arr;
-  } else if (arr.length % 2 === 0) {
-    let result = arr
-      .slice(Math.floor(arr.length / 2))
-      .concat(arr.slice(0, Math.floor(arr.length / 2)));
+  } 
+  const halfOfArray = Math.floor(arr.length / 2);
+  const wholePartOfArray = Math.ceil(arr.length / 2)
+  if (arr.length % 2 === 0) {
+    const result = arr
+      .slice(halfOfArray)
+      .concat(arr.slice(0, halfOfArray));
     return result;
   } else {
-    let result = arr
-      .slice(Math.ceil(arr.length / 2))
-      .concat(arr[Math.floor(arr.length / 2)])
-      .concat(arr.slice(0, Math.floor(arr.length / 2)));
+    const result = arr
+      .slice(wholePartOfArray)
+      .concat(arr[halfOfArray])
+      .concat(arr.slice(0, halfOfArray));
     return result;
   }
 }
