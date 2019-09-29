@@ -54,12 +54,10 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-  if (
-    (date.getFullYear() % 4 === 0 && date.getFullYear() % 100 !== 0) ||
-    date.getFullYear() % 400 === 0
-  ) {
-    return true;
-  } else return false;
+  const divedeByFour = date.getFullYear() % 4 === 0;
+  const notDivedeByOneHundred = date.getFullYear() % 100 !== 0;
+  const divedeByFourHundred = date.getFullYear() % 400 === 0;
+  return divedeByFour && notDivedeByOneHundred || divedeByFourHundred
 }
 
 /**
@@ -78,13 +76,15 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-  let min = endDate.getUTCMinutes() - startDate.getUTCMinutes();
-  let hours = endDate.getUTCHours() - startDate.getUTCHours();
-  let msec = endDate.getUTCMilliseconds() - startDate.getUTCMilliseconds();
-  let sec = endDate.getUTCSeconds() - startDate.getUTCSeconds();
-  return (
-    (hours < 10 ? "0" + hours : hours) + ":" +  (min < 10 ? "0" + min : min) +":" + (sec < 10 ? "0" + sec : sec) + "." + (msec < 10 ? "00" + msec : msec < 100 ? "0" + msec : msec)
-  );
+  const minutesOnTheClock = endDate.getUTCMinutes() - startDate.getUTCMinutes();
+  const hoursOnTheClock = endDate.getUTCHours() - startDate.getUTCHours();
+  const milliSecondsOnTheClock = endDate.getUTCMilliseconds() - startDate.getUTCMilliseconds();
+  const secondsOnTheClock = endDate.getUTCSeconds() - startDate.getUTCSeconds();
+  const hoursInTimeStampFormat = hoursOnTheClock < 10 ? "0" + hoursOnTheClock : hoursOnTheClock;
+  const mitutesInTimeStampFormat = minutesOnTheClock < 10 ? "0" + minutesOnTheClock : minutesOnTheClock;
+  const milliSecondsInTimeStampFormat = milliSecondsOnTheClock < 10 ? "00" + milliSecondsOnTheClock : milliSecondsOnTheClock < 100 ? "0" + milliSecondsOnTheClock : milliSecondsOnTheClock;
+  const secondsInTimeStampFormat = secondsOnTheClock < 10 ? "0" + secondsOnTheClock : secondsOnTheClock;
+  return hoursInTimeStampFormat + ":" + mitutesInTimeStampFormat  +":" + secondsInTimeStampFormat + "." + milliSecondsInTimeStampFormat 
 }
 
 /**
@@ -101,10 +101,17 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-  let hours = date.getUTCHours() < 12 ? date.getUTCHours() : date.getUTCHours() - 12;
-  let min = date.getUTCMinutes();
-  let angle = Math.abs(hours * 30 - min * 6 + min/60 * 30) * Math.PI/180;
-  return Math.min(angle, 2*Math.PI - angle);
+  const halfHoursOfDay = 12;
+  const angleInOneHourOnClock = 30;
+  const angleInOneMinuteOnClock = 6;
+  const thirtyDegrees = 30;
+  const sixtyDegrees = 60;
+  const oneHundredEightyDegrees = 180;
+  const hoursOnTheClock = date.getUTCHours() < halfHoursOfDay ? date.getUTCHours() : date.getUTCHours() - halfHoursOfDay;
+  const minutesOnTheClock = date.getUTCMinutes();
+  const angleBetweenHandsInSimpleFormat = Math.abs(hoursOnTheClock * angleInOneHourOnClock - minutesOnTheClock * angleInOneMinuteOnClock + minutesOnTheClock/sixtyDegrees * thirtyDegrees) * Math.PI/oneHundredEightyDegrees;
+  const angleBetweenClockHands = Math.min(angleBetweenHandsInSimpleFormat, 2*Math.PI - angleBetweenHandsInSimpleFormat);
+  return angleBetweenClockHands;
 }
 
 module.exports = {
